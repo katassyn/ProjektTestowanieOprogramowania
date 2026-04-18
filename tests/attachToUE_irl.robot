@@ -48,5 +48,4 @@ Verify Default Bearer Assigned
     ${bearer}=    Get From Dictionary    ${UE_BEARERS}    ${ue_id}
     Should Be Equal As Numbers    ${bearer}    ${DEFAULT_BEARER}    Oczekiwano ID=${DEFAULT_BEARER}, otrzymano ${bearer}
 
-
 *** Test Cases ***
