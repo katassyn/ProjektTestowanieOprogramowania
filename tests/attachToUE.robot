@@ -16,8 +16,8 @@ Setup Network State
     ${UE_BEARERS}=    Create Dictionary
     Set Suite Variable    ${UE_BEARERS}
 
-Attach UE to Network
-    [Arguments]    ${ue_id}
+Attach UE-${ue_id} to Network
+ #   [Arguments]    ${ue_id}
     IF    ${ue_id} < ${MIN_UE_ID} or ${ue_id} > ${MAX_UE_ID}
         Fail    UE ID ${ue_id} jest spoza zakresu (0-100)
     END
@@ -57,7 +57,7 @@ Verify Default Bearer Assigned
 TC01 UE Poprawnie Dolacza Do Sieci
     [Documentation]    AC1: UE może zostać dołączony do sieci
     [Setup]    Setup Network State
-    Attach UE to Network    50
+    Attach UE-50 to Network
     Verify UE Is Connected    50
 
 TC02 Podlaczony UE Otrzymuje Domyslny Bearer 9
