@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.11.9 on win32)" generated="2026-04-18T12:49:57.118144" rpa="false" schemaversion="5">
+<suite id="s1" name="attachToUE" source="F:\STUDIA\SEMESTR_6\Testowanie Oprogramowania NOKIA\epc-simulator\ProjektTestowanieOprogramowania\tests\attachToUE.robot">
+<test id="s1-t1" name="Attach UE Successfully" line="8">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.259146" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-18T12:49:57.259146" elapsed="0.000498"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.278146" level="INFO">POST Request : url=http://localhost:8000/ues 
+ path_url=/ues 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12'} 
+ body={"ue_id": 1} 
+ </msg>
+<msg time="2026-04-18T12:49:57.278644" level="INFO">POST Response : url=http://localhost:8000/ues 
+ status=200, reason=OK 
+ headers={'date': 'Sat, 18 Apr 2026 10:49:56 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ body={"status":"attached","ue_id":1} 
+ </msg>
+<msg time="2026-04-18T12:49:57.278644" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>api</arg>
+<arg>/ues</arg>
+<arg>data={"ue_id": 1}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.259644" elapsed="0.019000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-18T12:49:57.279644" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.279144" elapsed="0.000500"/>
+</kw>
+<status status="PASS" start="2026-04-18T12:49:57.258644" elapsed="0.021000"/>
+</test>
+<test id="s1-t2" name="Attach UE Out Of Range" line="13">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.280644" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-18T12:49:57.280644" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.286646" level="INFO">POST Request : url=http://localhost:8000/ues 
+ path_url=/ues 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '14'} 
+ body={"ue_id": 101} 
+ </msg>
+<msg time="2026-04-18T12:49:57.286646" level="INFO">POST Response : url=http://localhost:8000/ues 
+ status=422, reason=Unprocessable Entity 
+ headers={'date': 'Sat, 18 Apr 2026 10:49:56 GMT', 'server': 'uvicorn', 'content-length': '141', 'content-type': 'application/json'} 
+ body={"detail":[{"type":"less_than_equal","loc":["body","ue_id"],"msg":"Input should be less than or equal to 100","input":101,"ctx":{"le":100}}]} 
+ </msg>
+<msg time="2026-04-18T12:49:57.286646" level="INFO">${response} = &lt;Response [422]&gt;</msg>
+<var>${response}</var>
+<arg>api</arg>
+<arg>/ues</arg>
+<arg>data={"ue_id": 101}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.281144" elapsed="0.005502"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-18T12:49:57.287644" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>422</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.287144" elapsed="0.000500"/>
+</kw>
+<status status="PASS" start="2026-04-18T12:49:57.280151" elapsed="0.007493"/>
+</test>
+<test id="s1-t3" name="Attach UE Already Connected" line="18">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.288144" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-18T12:49:57.288144" elapsed="0.000500"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.303145" level="INFO">POST Request : url=http://localhost:8000/ues 
+ path_url=/ues 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12'} 
+ body={"ue_id": 2} 
+ </msg>
+<msg time="2026-04-18T12:49:57.303645" level="INFO">POST Response : url=http://localhost:8000/ues 
+ status=200, reason=OK 
+ headers={'date': 'Sat, 18 Apr 2026 10:49:56 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ body={"status":"attached","ue_id":2} 
+ </msg>
+<arg>api</arg>
+<arg>/ues</arg>
+<arg>data={"ue_id": 2}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.288644" elapsed="0.015001"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.351646" level="INFO">POST Request : url=http://localhost:8000/ues 
+ path_url=/ues 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12'} 
+ body={"ue_id": 2} 
+ </msg>
+<msg time="2026-04-18T12:49:57.351646" level="INFO">POST Response : url=http://localhost:8000/ues 
+ status=400, reason=Bad Request 
+ headers={'date': 'Sat, 18 Apr 2026 10:49:56 GMT', 'server': 'uvicorn', 'content-length': '32', 'content-type': 'application/json'} 
+ body={"detail":"UE already attached"} 
+ </msg>
+<msg time="2026-04-18T12:49:57.351646" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>api</arg>
+<arg>/ues</arg>
+<arg>data={"ue_id": 2}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.303645" elapsed="0.048001"/>
+</kw>
+<kw name="Should Not Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-18T12:49:57.352644" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are equal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.352144" elapsed="0.000500"/>
+</kw>
+<status status="PASS" start="2026-04-18T12:49:57.288144" elapsed="0.064500"/>
+</test>
+<test id="s1-t4" name="Attach UE Creates Default Bearer" line="24">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.353644" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-18T12:49:57.353144" elapsed="0.000500"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.366144" level="INFO">POST Request : url=http://localhost:8000/ues 
+ path_url=/ues 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12'} 
+ body={"ue_id": 3} 
+ </msg>
+<msg time="2026-04-18T12:49:57.366144" level="INFO">POST Response : url=http://localhost:8000/ues 
+ status=200, reason=OK 
+ headers={'date': 'Sat, 18 Apr 2026 10:49:56 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ body={"status":"attached","ue_id":3} 
+ </msg>
+<arg>api</arg>
+<arg>/ues</arg>
+<arg>data={"ue_id": 3}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.353644" elapsed="0.012500"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-04-18T12:49:57.370644" level="INFO">GET Request : url=http://localhost:8000/ues/3 
+ path_url=/ues/3 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-04-18T12:49:57.370644" level="INFO">GET Response : url=http://localhost:8000/ues/3 
+ status=200, reason=OK 
+ headers={'date': 'Sat, 18 Apr 2026 10:49:56 GMT', 'server': 'uvicorn', 'content-length': '103', 'content-type': 'application/json'} 
+ body={"ue_id":3,"bearers":{"9":{"bearer_id":9,"protocol":null,"target_bps":null,"active":false}},"stats":{}} 
+ </msg>
+<msg time="2026-04-18T12:49:57.370644" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>api</arg>
+<arg>/ues/3</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.366644" elapsed="0.004000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-18T12:49:57.371644" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-18T12:49:57.371144" elapsed="0.000500"/>
+</kw>
+<status status="PASS" start="2026-04-18T12:49:57.353144" elapsed="0.018500"/>
+</test>
+<status status="PASS" start="2026-04-18T12:49:57.128144" elapsed="0.243999"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="attachToUE" id="s1" pass="4" fail="0" skip="0">attachToUE</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
